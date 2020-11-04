@@ -1,5 +1,6 @@
 import { Cell } from "/js/cell.js";
 import { UI } from "/js/ui.js";
+import { Counter } from "/js/counter.js";
 
 class Game extends UI {
   #config = {
@@ -20,6 +21,8 @@ class Game extends UI {
     },
   };
 
+  #counter = new Counter();
+
   #numberOfRows = null;
   #numberOfCols = null;
   #numberOfMines = null;
@@ -29,7 +32,8 @@ class Game extends UI {
 
   #board = null;
 
-  initialiazeGame() {
+  initializeGame() {
+    this.#counter.init();
     this.#handleElements();
     this.#newGame();
   }
@@ -101,6 +105,10 @@ class Game extends UI {
     const cell = this.#cells[rowIndex][colIndex];
     if(cell.isReveal) return;
 
+    if(cell.isFlagged){
+      this.#counter.increment();
+    }
+
     cell.toggleFlag();
   }
 
@@ -111,5 +119,5 @@ class Game extends UI {
 
 window.onload = function () {
   const game = new Game();
-  game.initialiazeGame();
+  game.initializeGame();
 };

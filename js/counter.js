@@ -1,11 +1,11 @@
-import {UI} from '/js/ui.js'
+import {UI} from '/js/ui.js';
 
 export class Counter extends UI{
     value = null;
     #element = null;
 
     init(){
-        this.#element = this.getElement(this.getElement(this.UiSelectors.counter))
+        this.#element = this.getElement(this.UiSelectors.counter)
     }
 
     setValue(value){
@@ -17,7 +17,7 @@ export class Counter extends UI{
         this.value++;
         this.#updateValue();
     }
-    
+
     decrement(){
         this.value--;
         this.#updateValue();

@@ -4,7 +4,6 @@ export class UI{
         cell: '[data-cell]',
         counter: '[data-counter]',
         timer: '[data-timer]'
-
     }
 
     getElement(selector){
