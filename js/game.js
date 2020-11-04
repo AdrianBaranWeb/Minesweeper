@@ -47,6 +47,8 @@ class Game extends UI {
     this.#numberOfCols = cols;
     this.#numberOfMines = mines;
 
+    this.#counter.setValue(this.#numberOfMines);
+
     this.#setStyles();
 
     this.#generateCells();
@@ -107,9 +109,14 @@ class Game extends UI {
 
     if(cell.isFlagged){
       this.#counter.increment();
+      cell.toggleFlag();
+      return
     }
 
-    cell.toggleFlag();
+    if(!!this.#counter.value){
+      this.#counter.decrement();
+      cell.toggleFlag();
+    }
   }
 
   #setStyles() {
