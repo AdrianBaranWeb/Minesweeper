@@ -25,6 +25,7 @@ class Game extends UI {
   #numberOfMines = null;
 
   #cells = [];
+  #cellsElements = null;
 
   #board = null;
 
@@ -46,6 +47,17 @@ class Game extends UI {
 
     this.#generateCells();
     this.#renderBoard();
+
+    this.#cellsElements = this.getElements(this.UiSelectors.cell);
+
+    this.#addCellsEventListeners()
+  }
+
+  #addCellsEventListeners(){
+    this.#cellsElements.forEach(element => {
+      element.addEventListener('click', this.#handleCellClick);
+      element.addEventListener('contextmenu', this.#handleCellContextMenu);
+    })
   }
 
   #handleElements() {
@@ -68,11 +80,32 @@ class Game extends UI {
     });
   }
 
+  #handleCellClick = e => {
+    const target = e.target;
+    const rowIndex = parseInt(target.getAttribute('data-y'), 10);
+    const colIndex = parseInt(target.getAttribute('data-x'), 10);
+
+    //i add this two lines
+    const cell = this.#cells[rowIndex][colIndex];
+    if(cell.isFlagged) return;
+
+    this.#cells[rowIndex][colIndex].revealCell()
+  }
+
+  #handleCellContextMenu = e => {
+    e.preventDefault();
+    const target = e.target;
+    const rowIndex = parseInt(target.getAttribute('data-y'), 10);
+    const colIndex = parseInt(target.getAttribute('data-x'), 10);
+
+    const cell = this.#cells[rowIndex][colIndex];
+    if(cell.isReveal) return;
+
+    cell.toggleFlag();
+  }
+
   #setStyles() {
-    document.documentElement.style.setProperty(
-      "--cells-in-row",
-      this.#numberOfCols
-    );
+    document.documentElement.style.setProperty("--cells-in-row", this.#numberOfCols);
   }
 }
 

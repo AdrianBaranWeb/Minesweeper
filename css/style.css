@@ -48,6 +48,9 @@ html{
     width: var(--cell-size);
     height: var(--cell-size);
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    background-position: center;
 }
 
 .header{
@@ -62,7 +65,7 @@ html{
     padding: 0.5rem;
     font-family: 'DIGITALDREAM', sans-serif;
     font-size: 3.2rem;
-    min-width: 8rem;
+    min-width: 9rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -155,6 +158,15 @@ html{
 
 .border--concave{
     border-color: #fff var(--primary-color--dark) var(--primary-color--dark) #fff;
+}
+
+.border--revealed{
+    border-width: .1rem;
+    border-color: var(--primary-color--dark);
+}
+
+.cell--is-flag{
+    background-image: url(/assets/flag.svg);
 }
 
 .hide{
