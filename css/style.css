@@ -166,7 +166,12 @@ html{
 }
 
 .cell--is-flag{
-    background-image: url(/assets/flag.svg);
+    background-image: url('/assets/flag.svg');
+}
+
+.cell--is-mine{
+    background-image: url('/assets/bomb.svg');
+    background-color: var(--alarm-color);
 }
 
 .hide{
