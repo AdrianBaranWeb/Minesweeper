@@ -151,11 +151,11 @@ class Game extends UI {
   }
 
   #clickCell(cell){
-    if(this.#isGameFinished) return;
+    if(this.#isGameFinished || cell.isFlagged) return;
     if(cell.isMine){
       this.#endGame(false);
     }else{
-      cell.revealCell();
+      this.#setCellValue(cell);
     }
   }
 
@@ -163,12 +163,36 @@ class Game extends UI {
     this.#cells.flat().filter(({isMine}) => isMine).forEach(cell => cell.revealCell())
   }
 
+  #setCellValue(cell){
+    let mineCount = 0;
+    for(let rowIndex = Math.max(cell.y - 1, 0); rowIndex <= Math.min(cell.y + 1, this.#numberOfRows - 1); rowIndex++){
+      for(let colIndex = Math.max(cell.x - 1, 0); colIndex <= Math.min(cell.x + 1, this.#numberOfCols - 1); colIndex++){
+        if(this.#cells[rowIndex][colIndex].isMine){
+          mineCount++;
+        }
+      }
+    }
+    cell.value = mineCount;
+    cell.revealCell();
+
+    if(!cell.value){
+      for(let rowIndex = Math.max(cell.y - 1, 0); rowIndex <= Math.min(cell.y + 1, this.#numberOfRows - 1); rowIndex++){
+        for(let colIndex = Math.max(cell.x - 1, 0); colIndex <= Math.min(cell.x + 1, this.#numberOfCols - 1); colIndex++){
+          const cell = this.#cells[rowIndex][colIndex];
+          if(!cell.isReveal){
+            this.#clickCell(cell);
+          }
+        }
+      }
+    }
+  }
+
   #setStyles() {
     document.documentElement.style.setProperty("--cells-in-row", this.#numberOfCols);
   }
 
   #getRandomIntiger(min, max){
-    return Math.floor(Math.random() * (max-min +1)) + min
+    return Math.floor(Math.random() * (max - min + 1)) + min
   }
 }
 
