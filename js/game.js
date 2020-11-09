@@ -10,7 +10,7 @@ class Game extends UI {
       cols: 8,
       mines: 10,
     },
-    medium: {
+    normal: {
       rows: 16,
       cols: 16,
       mines: 40,
