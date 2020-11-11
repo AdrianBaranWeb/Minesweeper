@@ -1,4 +1,4 @@
-import {UI} from '/js/ui.js'
+import {UI} from '/js/ui.js';
 export class ResetButton extends UI{
     element = this.getElement(this.UiSelectors.resetButton);
 
