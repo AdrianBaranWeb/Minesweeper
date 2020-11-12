@@ -274,7 +274,7 @@ class Game extends UI {
     if(row < 0 || row == 0 || col < 0 || col == 0){
       alert('Number of cols and rows must be minimum 1!')
     }else{
-      if(mine === 0 || mine < 0 || mine >= col * row){
+      if(mine == 0 || mine < 0 || mine >= col * row){
         alert('Number of mines must be minimum 1 and not more than number of cells!')
       }else{
         this.#handleNewGameClick(this.#config.own.rows = row, this.#config.own.cols = col, this.#config.own.mines = mine);
