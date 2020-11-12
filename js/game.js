@@ -22,7 +22,16 @@ class Game extends UI {
       cols: 30,
       mines: 99,
     },
+    own: {
+      rows: null,
+      cols: null,
+      mines: null,
+    }
   };
+
+  #ownRows = this.getElement(this.UiSelectors.ownRows);
+  #ownCols = this.getElement(this.UiSelectors.ownCols);
+  #ownMines = this.getElement(this.UiSelectors.ownMines);
 
   #counter = new Counter();
   #timer = new Timer();
@@ -44,6 +53,8 @@ class Game extends UI {
     easy: null,
     normal: null,
     expert: null,
+    own: null,
+    ownDifficulty: null,
     reset: new ResetButton()
   }
 
@@ -102,6 +113,7 @@ class Game extends UI {
     this.#buttons.reset.changeEmotion('positive');
     this.#modal.setText();
     this.#modal.toggleModal();
+    this.#revealMines();
   }
 
   #addCellsEventListeners(){
@@ -119,7 +131,10 @@ class Game extends UI {
   }
 
   #addButtonsEventsListeners(){
-    this.#buttons.modal.addEventListener('click', this.#modal.toggleModal)
+    this.#buttons.modal.addEventListener('click', this.#modal.toggleModal);
+    this.#buttons.own.addEventListener('click', this.#modal.toggleDifficultyModal);
+    this.#buttons.ownDifficultyCanceled.addEventListener('click', this.#modal.toggleDifficultyModal);
+    this.#buttons.ownDifficulty.addEventListener('click', () => this.#difficultSettings());
     this.#buttons.easy.addEventListener('click', () => this.#handleNewGameClick(this.#config.easy.rows, this.#config.easy.cols, this.#config.easy.mines));
     this.#buttons.normal.addEventListener('click', () => this.#handleNewGameClick(this.#config.normal.rows, this.#config.normal.cols, this.#config.normal.mines));
     this.#buttons.expert.addEventListener('click', () => this.#handleNewGameClick(this.#config.expert.rows, this.#config.expert.cols, this.#config.expert.mines));
@@ -137,6 +152,9 @@ class Game extends UI {
     this.#buttons.easy = this.getElement(this.UiSelectors.easyButton);
     this.#buttons.normal = this.getElement(this.UiSelectors.normalButton);
     this.#buttons.expert = this.getElement(this.UiSelectors.expertButton);
+    this.#buttons.ownDifficulty = this.getElement(this.UiSelectors.ownDifficulty);
+    this.#buttons.own = this.getElement(this.UiSelectors.ownButton);
+    this.#buttons.ownDifficultyCanceled = this.getElement(this.UiSelectors.difficultyButtonCanceled);
   }
 
   #generateCells() {
@@ -247,6 +265,14 @@ class Game extends UI {
         }
       }
     }
+  }
+
+  #difficultSettings(){
+    const row = this.#ownRows.value
+    const col = this.#ownCols.value
+    const mine = this.#ownMines.value
+    this.#handleNewGameClick(this.#config.own.rows = row, this.#config.own.cols = col, this.#config.own.mines = mine);
+    this.#modal.toggleDifficultyModal();
   }
 
   #setStyles() {

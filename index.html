@@ -28,12 +28,33 @@
                 <button class="button" data-button-easy>Easy</button>
                 <button class="button" data-button-normal>Normal</button>
                 <button class="button" data-button-expert>Expert</button>
+                <button class="button" data-button-own>Own</button>
             </section>
         </article>
         <article class="modal hide" data-modal>
             <section class="modal__content">
                 <h2 class="modal__text" data-modal-header>You won!</h2>
                 <button class="modal__button" data-modal-button>Play again!</button>
+            </section>
+        </article>
+        <article class="modal hide" data-difficulty-modal>
+            <section class="modal__content">
+                <h2 class="modal__text">Set the difficulty level</h2>
+                <div class="row">
+                    <label for="rows">Number of Rows:</label>
+                    <input type="number" name="rows" id="rows" min='1' data-own-rows>
+                </div>
+                <div class="row">    
+                    <label for="cols">Number of Cols:</label>
+                    <input type="number" name="cols" id="cols" min='1' data-own-cols></div>
+                <div class="row">
+                    <label for="mines">Number of Mines:</label>
+                    <input type="number" name="mines" ind="mines" min='1' data-own-mines>
+                </div>
+                <div class="row">
+                    <button class="modal__button" data-difficulty-button-accept>Accept</button>
+                    <button class="modal__button" data-difficulty-button-canceled>Canceld</button>
+                </div>
             </section>
         </article>
     </main>
