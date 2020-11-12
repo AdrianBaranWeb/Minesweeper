@@ -44,6 +44,7 @@ html{
     background-color: var(--primary-color);
     padding: var(--game-padding);
     max-width: var(--game-max-width);
+    min-width: 31.6rem;
     margin-left: auto;
     margin-right: auto;
 }
