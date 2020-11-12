@@ -1,9 +1,9 @@
-import { Cell } from "/js/cell.js";
-import { UI } from "/js/ui.js";
-import { Counter } from "/js/counter.js";
-import { Timer } from "/js/timer.js";
-import { ResetButton } from "/js/resetButton.js";
-import {Modal} from '/js/modal.js'
+import { Cell } from "./cell.js";
+import { UI } from "./ui.js";
+import { Counter } from "./counter.js";
+import { Timer } from "./timer.js";
+import { ResetButton } from "./resetButton.js";
+import {Modal} from './modal.js'
 
 class Game extends UI {
   #config = {

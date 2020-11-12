@@ -22,7 +22,7 @@
 
 @font-face{
     font-family: DIGITALDREAM;
-    src: url('/assets/DIGITALDREAM.ttf');
+    src: url('../assets/DIGITALDREAM.ttf');
 }
 
 *, *::before, *::after{
@@ -207,11 +207,11 @@ input{
 }
 
 .cell--is-flag{
-    background-image: url('/assets/flag.svg');
+    background-image: url('../assets/flag.svg');
 }
 
 .cell--is-mine{
-    background-image: url('/assets/bomb.svg');
+    background-image: url('../assets/bomb.svg');
     background-color: var(--alarm-color);
 }
 
